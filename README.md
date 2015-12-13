@@ -17,6 +17,7 @@ to read
 - [Patterns of Enterprise Application Architecture](http://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/8131794024)
 - [Enterprise Integration patterns](http://www.enterpriseintegrationpatterns.com)
 - [design patterns](https://web.archive.org/web/20120530141300/http://www.vico.org/pages/PatronsDisseny.html)
+
 ##microservices
 - [O'Reilly Building Microservices free sample](http://cdn.oreillystatic.com/oreilly/booksamplers/9781491950357_sampler.pdf)
 - [Fowler on microservices](http://www.martinfowler.com/articles/microservices.html)
