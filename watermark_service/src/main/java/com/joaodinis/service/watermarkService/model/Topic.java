@@ -1,0 +1,24 @@
+package com.joaodinis.service.watermarkService.model;
+
+public enum Topic {
+
+	BUSINESS("Business"), SCIENCE("Science"), MEDIA("Media");
+
+	////////////////////////////////////////////////////////////////////////////
+
+	private final String topicName;
+
+	////////////////////////////////////////////////////////////////////////////
+
+	private Topic(final String topicName_) {
+		this.topicName = topicName_;
+
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public String toString() {
+		return this.topicName;
+	}
+}
