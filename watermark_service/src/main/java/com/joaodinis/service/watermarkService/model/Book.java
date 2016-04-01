@@ -31,7 +31,8 @@ public class Book extends Document {
 	@Override
 	public String toString() {
 		final String s = "id: " + this.getId() + ", title: " + this.getTitle() + ", author: " + this.getAuthor()
-				+ ", content:" + this.getContent() + ", topic: " + this.topic.getTopic();
+				+ ", content:" + this.getContent() + ", topic: " + this.topic.getTopic() + ", watermark: "
+				+ this.getWatermark();
 		return s;
 	}
 }

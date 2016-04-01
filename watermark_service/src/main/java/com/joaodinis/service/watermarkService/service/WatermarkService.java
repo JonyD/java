@@ -5,23 +5,48 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joaodinis.service.watermarkService.model.Document;
 import com.joaodinis.service.watermarkService.model.Ticket;
 
-public class WatermarkService {
-
-	private static Ticket ticket;
+public class WatermarkService implements Runnable {
 
 	////////////////////////////////////////////////////////////////////////////
 
-	public static Ticket performService(final Document document) {
+	@Override
+	public void run() {
 
-		ticket = Ticket.create(document.getId());
-		ticket.setWorking();// ticket.status = WORKING
+		try {
+			final Ticket performService = this.performService();
+			Thread.sleep(1000);
+			System.out.println("Ticket criado: " + performService.toString());
 
-		final String watermark = createWatermark(document);
-		if (watermark != null) {
-			document.setWatermark(watermark);
-			ticket.setDone(); // ticket.status = DONE
+		} catch (final InterruptedException ex) {
+			System.out.println("Exception: " + ex);
+
 		}
-		return ticket;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	private final Document document;
+	private Ticket ticket;
+
+	////////////////////////////////////////////////////////////////////////////
+
+	public WatermarkService(final Document document) {
+		this.document = document;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	public Ticket performService() {
+
+		this.ticket = Ticket.create(this.document.getId());
+		this.ticket.setWorking();// ticket.status = WORKING
+
+		final String watermark = createWatermark(this.document);
+		if (watermark != null) {
+			this.document.setWatermark(watermark);
+			this.ticket.setDone(); // ticket.status = DONE
+		}
+		return this.ticket;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -38,4 +63,7 @@ public class WatermarkService {
 		}
 		return null;
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+
 }

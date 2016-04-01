@@ -18,7 +18,7 @@ public class Journal extends Document {
 	@Override
 	public String toString() {
 		final String s = "id: " + this.getId() + ", title: " + this.getTitle() + ", author: " + this.getAuthor()
-				+ ", content:" + this.getContent();
+				+ ", content:" + this.getContent() + ", watermark: " + this.getWatermark();
 		return s;
 	}
 }
