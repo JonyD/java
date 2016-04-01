@@ -15,32 +15,25 @@ public class Ticket {
 
 	private Ticket(final int documentId) {
 		this.documentId = documentId;
-		this.status = TicketStatus.NOT_DONE;
+		this.status = TicketStatus.WORKING;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 
-	public void activateTicket() {
+	public void setDone() {
 		this.status = TicketStatus.DONE;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 
-	public boolean isDone() {
-		return this.status.equals(TicketStatus.DONE);
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-
-	public int getDocumentId() {
-		return this.documentId;
+	public void setWorking() {
+		this.status = TicketStatus.WORKING;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public String toString() {
-
 		final String s = "documentId: " + this.documentId + "status: " + this.status;
 		return s;
 	}

@@ -1,15 +1,28 @@
 package com.joaodinis.service.watermarkService.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Book extends Document {
 
-	private final String content;
 	private final Topic topic;
 
 	////////////////////////////////////////////////////////////////////////////
 
-	public Book(final String title, final String author, final Topic topic) {
-		super(title, author);
-		this.content = "book";
+	@JsonProperty("topic")
+	private String getTopic() {
+		return this.topic.getTopic();
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	public static Book create(final int id, final String title, final String author, final Topic topic) {
+		return new Book(id, title, author, topic);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	private Book(final int id, final String title, final String author, final Topic topic) {
+		super(id, title, author, "book");
 		this.topic = topic;
 	}
 
@@ -17,12 +30,8 @@ public class Book extends Document {
 
 	@Override
 	public String toString() {
-
-		final String s = "title: " + this.getTitle() + "author: " + this.getAuthor() + "content:" + this.content
-				+ "topic: " + this.topic.toString();
+		final String s = "id: " + this.getId() + ", title: " + this.getTitle() + ", author: " + this.getAuthor()
+				+ ", content:" + this.getContent() + ", topic: " + this.topic.getTopic();
 		return s;
 	}
-
-	////////////////////////////////////////////////////////////////////////////
-
 }

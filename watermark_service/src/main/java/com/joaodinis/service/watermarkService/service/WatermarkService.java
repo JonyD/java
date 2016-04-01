@@ -6,33 +6,27 @@ import com.joaodinis.service.watermarkService.model.Document;
 import com.joaodinis.service.watermarkService.model.Ticket;
 
 public class WatermarkService {
-	private final Ticket ticket;
 
-	private WatermarkService() {
-		this.ticket = Ticket.create(1); // docId is missing
-	}
+	private static Ticket ticket;
 
 	////////////////////////////////////////////////////////////////////////////
 
-	public WatermarkService create() {
-		return new WatermarkService();
-	}
+	public static Ticket performService(final Document document) {
 
-	////////////////////////////////////////////////////////////////////////////
+		ticket = Ticket.create(document.getId());
+		ticket.setWorking();// ticket.status = WORKING
 
-	public Document performService(final Document document) {
-
-		final String watermark = this.createWatermark(document);
+		final String watermark = createWatermark(document);
 		if (watermark != null) {
 			document.setWatermark(watermark);
-			this.ticket.activateTicket();
+			ticket.setDone(); // ticket.status = DONE
 		}
-		return document;
+		return ticket;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 
-	private String createWatermark(final Document document) {
+	private static String createWatermark(final Document document) {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
 			final String documentAsJson = mapper.writeValueAsString(document);
